@@ -1,5 +1,7 @@
 # Biodiversity-maps
 
+## Project description
+
 The project has three phases:
 
 1. Biodiversity maps for the general use of the biodiversity community using data provided by the University of Birmingham. This will show "biodiversity hotspots" – areas of greatest interest to the researchers and conservationists.
