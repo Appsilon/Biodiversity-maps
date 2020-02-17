@@ -34,4 +34,10 @@ The folder also contains an .R database (db3.r) with over 4 million datapoints f
 
 These data had been used to produce basic maps, such as the one for forest genetic resources:
 
-![alt text](https://github.com/Appsilon/Biodiversity-maps/blob/master/legacy-vis/forestry_species_total.jpg "Forest visualization total")
+
+![alt text](https://github.com/Appsilon/Biodiversity-maps/blob/master/legacy-vis/forestry_species_total.jpg "Forest species per lat/lon map")
+
+The data for animal genetic resources do not allow for creating such detailed maps. Here, we focus on the number of species/breeds in each country, such as in this sample map:
+
+![alt text](https://github.com/Appsilon/Biodiversity-maps/blob/master/legacy-vis/animal_species_country.jpg "Animal species per country map")
+
