@@ -34,6 +34,4 @@ The folder also contains an .R database (db3.r) with over 4 million datapoints f
 
 These data had been used to produce basic maps, such as the one for forest genetic resources:
 
-![alt text][forest-total]
-
-[forest–total]: https://github.com/Appsilon/Biodiversity-maps/blob/master/legacy-vis/forestry_species_total.jpg "Forest visualization total"
+![alt text](https://github.com/Appsilon/Biodiversity-maps/blob/master/legacy-vis/forestry_species_total.jpg "Forest visualization total")
