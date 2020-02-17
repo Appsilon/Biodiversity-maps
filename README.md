@@ -36,4 +36,4 @@ These data had been used to produce basic maps, such as the one for forest genet
 
 ![alt text][forest-total]
 
-[forest–total]:legacy-vis/forestry_species_total.jpg "Forest visualization total"
+[forest–total]: legacy-vis/forestry_species_total.jpg "Forest visualization total"
