@@ -30,6 +30,23 @@ The folder also contains an .R database (db3.r) with over 4 million datapoints f
 
 [Project data](https://drive.google.com/drive/folders/1slcO5BjqCEHJqhTXCfs-Mb1LCFnWxQZi?usp=sharing "Google Drive folder")
 
+## Success criteria
+
+For the first phase of the project we want to produce informative and visually appealing maps. We aim to deliver:
+
+* A print-ready version (which can be turned into a poster)
+* An interactive map – hovering over a given region should provide more detailed information about the particular species occuring there
+
+We are not creating any animations at this stage, because we do not have access to historical data (it appears such data doesn't really exist anyway or at least has not yet been collated by the biodiversity community).
+
+Specifically we need to create 7 maps for the three domains (forests, plants and animals):
+
+* Visualise species richness for each domain separately (3 maps)
+* Visualise species richness at common data level* for each domain separately (*common data level = number of species within a country) (2 maps as we only have country level data for animals)
+* Visualise species richness at common data level on ONE map for all domains
+* Visualise species richness at common data level on ONE map for all domains AND showing total species richness (all domains together) for each country
+
+
 ## Sample visualizations
 
 These data had been used to produce basic maps, such as the one for forest genetic resources:
