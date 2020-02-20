@@ -16,7 +16,7 @@ The project has three phases:
 
 ## Data
 
-The data folder linked-up below contains data for plant, animal and forest genetic resources.
+The data folder linked-up below contains data for plant, animal and forest genetic resources organized in three folders.
 
 The file names and corresponding content are as follows:
 
@@ -26,7 +26,7 @@ The file names and corresponding content are as follows:
 
 * PGR_partial_Jan2020.csv – plant genetic resources data (this is to be combined with the R database, as described below)
 
-The folder also contains an .R database (db3.r) with over 4 million datapoints for crop wild relative distribution in Europe.  This data has come directly from the Farmers Pride project.  The data is in a R database format, so can be used directy in R software.  Dr Jade Phillips (our client) will eventually be using the data via Python but she hasn't worked out how to get this data working in python yet.  It is important to note that the data folder (specifically the dbr.r file) will need to be combined with the PGR_partial_Jan2020.csv file. That will then give you all the data for the Plat Genetic Resources domain.
+The plants folder also contains an .R database (db3.r) with over 4 million datapoints for crop wild relative distribution in Europe.  This data has come directly from the Farmers Pride project.  The data is in a R database format, so can be used directy in R software.  Dr Jade Phillips (our client) will eventually be using the data via Python but she hasn't worked out how to get this data working in python yet.  It is important to note that the data folder (specifically the dbr.r file) will need to be combined with the PGR_partial_Jan2020.csv file. That will then give you all the data for the Plat Genetic Resources domain.
 
 [Project data](https://drive.google.com/drive/folders/1slcO5BjqCEHJqhTXCfs-Mb1LCFnWxQZi?usp=sharing "Google Drive folder")
 
