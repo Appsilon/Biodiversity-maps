@@ -3,79 +3,77 @@ library(ggplot2)
 library(viridis)
 library(dplyr)
 library(extrafont)
+library(ggiraph)
+library(raster)
+library(rgdal)
+library(themes)
 source("./src/read_data.R")
+source("./src/custom_charts.R")
 
 loadfonts()
 
+relief <- raster("geojson/raster.tif")
+relief_spdf <- as(relief, "SpatialPixelsDataFrame")
+# relief is converted to a very simple data frame,  just as the fortified municipalities.
+# for that we need to convert it to a SpatialPixelsDataFrame first,
+# and then extract its contents using as.data.frame
+relief <- as.data.frame(relief_spdf) %>% rename(value = raster)
+
 world_geojson_loc <- file.path(getwd(), "geojson/world.geojson")
-gsf <- read_sf(paste0(readLines(world_geojson_loc), collapse = ""))
+sf <- read_sf(paste0(readLines(world_geojson_loc), collapse = ""))
 
 empty_data <- function(df) {
-  all(c(df$"Number of animal species" == 0, df$"Number of animal breeds" == 0))
+  all(c(df$number_species == 0, df$number_breeds == 0))
 }
 
-missing <- animal_genetic_resources[!(animal_genetic_resources$Country_ISO %in% gsf$ISO_A3), ]
-if (!empty_data(missing)) {
-  warning("Geojson don't have shapefiles for non-empty countries!")
-  print(missing)
+prepare_animal_data <- function(animal_data_raw, countries) {
+  missing <- animal_data_raw[!(animal_data_raw$Country_ISO %in% countries$ISO_A3), ]
+  if (!empty_data(missing)) {
+    warning("Geojson does not containt polygons for some countries!")
+    print(missing)
+  }
+  filter(animal_data_raw, !(Country_ISO %in% missing$Country_ISO)) %>%
+    select(country, number_species, number_breeds, ISO_A3)
 }
 
-animal_genetic_clean <- filter(animal_genetic_resources, !(Country_ISO %in% missing$Country_ISO))
-gsf_europe <- gsf[gsf$ISO_A3 %in% animal_genetic_clean$Country_ISO, ] %>%
-  lwgeom::st_make_valid(.) %>%
-  st_crop(xmin = -25, xmax = 50, ymin = 10, ymax = 70)
-
-animal_short <- animal_genetic_clean %>%
-  mutate(number_species = `Number of animal species`) %>%
-  mutate(number_breeds = `Number of animal breeds`) %>%
-  mutate(country = NAME_0, ISO_A3 = Country_ISO) %>%
-  select(country, ISO_A3, number_species, number_breeds)
-
-full_spdf <- merge(gsf_europe, animal_short, by = "ISO_A3") %>%
-  filter(number_species > 0) %>%
-  mutate(tooltip_text = paste(country, number_species))
-
-theme_map <- function(...) {
-  theme_minimal() +
-  theme(
-    text = element_text(family = "Maven Pro", color = "#22211d"),
-    axis.line = element_blank(),
-    axis.text.x = element_blank(),
-    axis.text.y = element_blank(),
-    axis.ticks = element_blank(),
-    axis.title.x = element_blank(),
-    axis.title.y = element_blank(),
-    # panel.grid.minor = element_line(color = "#ebebe5", size = 0.2),
-    panel.grid.major = element_line(color = "#ebebe5", size = 0.2),
-    panel.grid.minor = element_blank(),
-    plot.background = element_rect(fill = "#f5f5f2", color = NA),
-    panel.background = element_rect(fill = "#f5f5f2", color = NA),
-    legend.background = element_rect(fill = "#f5f5f2", color = NA),
-    panel.border = element_blank(),
-    ...
-  )
+cut_visible_europe <- function(sf, data) {
+  sf[sf$ISO_A3 %in% data$ISO_A3, ] %>%
+    lwgeom::st_make_valid(.) %>%
+    st_crop(xmin = -25, xmax = 50, ymin = 10, ymax = 70)
 }
 
-p <- ggplot(data = full_spdf) +
-  geom_sf_interactive(aes(fill = number_species, tooltip = tooltip_text)) +
-  scale_fill_viridis(name = "Number of animal species", guide = guide_legend(keyheight = unit(3, units = "mm"), keywidth = unit(12, units = "mm"), label.position = "bottom", title.position = 'top', nrow = 1)) +
-  labs(
-    title = "Number of animal species",
-    subtitle = "Better description"
-  ) +
-  theme_map()
+animal_data <- prepare_animal_data(animal_genetic_resources, sf)
+sf_europe <- cut_visible_europe(sf, animal_data)
+
+plot_animal <- function(sf, animal_data, target_column, interactive = FALSE) {
+  target_column <- rlang::enquo(target_column)
+  full_spdf <- merge(sf, animal_data, by = "ISO_A3") %>%
+    filter(!!target_column > 0) %>%
+    mutate(tooltip_text = paste(country, !!target_column))
+
+  p <- ggplot(data = full_spdf) +
+    # raster comes as the first layer, municipalities on top
+    # geom_raster(data = relief, aes(x = x,
+    #                                y = y,
+    #                                alpha = value)) +
+    # use the "alpha hack"
+    # scale_alpha(name = "", range = c(0.6, 0), guide = F)  +
+    geom_sf_interactive(aes(fill = !!target_column, tooltip = tooltip_text)) +
+    scale_fill_viridis(name = "Number of animal species",
+                       guide = guide_legend(keyheight = unit(3, units = "mm"),
+                                             keywidth = unit(12, units = "mm"),
+                                             label.position = "bottom",
+                                             title.position = 'top',
+                                             nrow = 1)) +
+    labs(
+      title = "Number of animal species",
+      subtitle = "Better description"
+    ) +
+    theme_map()
+
+  (if (interactive) girafe(ggobj = p) else p)
+}
+
+p <- plot_animal(sf_europe, animal_data, number_species)
 p
-  theme(
-    text = element_text(color = "#22211d"),
-    plot.background = element_rect(fill = "#f5f5f2", color = NA),
-    panel.background = element_rect(fill = "#f5f5f2", color = NA),
-    legend.background = element_rect(fill = "#f5f5f2", color = NA),
-    plot.title = element_text(size = 22, hjust = 0.01, color = "#4e4d47", margin = margin(b = -0.1, t = 0.4, l = 2, unit = "cm")),
-    plot.subtitle = element_text(size = 17, hjust = 0.01, color = "#4e4d47", margin = margin(b = -0.1, t = 0.43, l = 2, unit = "cm")),
-    legend.position = c(0.5, 0.1)
-  )
-p
-
-# Interactive version:
-library(ggiraph)
-girafe(ggobj = p)
+# p <- plot_animal(sf_europe, animal_data, number_breeds)

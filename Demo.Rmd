@@ -1,0 +1,38 @@
+---
+title: "Before and after"
+output: html_notebook
+---
+
+
+```{r}
+source("./src/plot_animals.R")
+```
+
+## Animal breeds on country level
+
+![Animal breeds on country level](legacy-vis/animal_breeds_country.jpg)
+```{r}
+plot_animal(sf_europe, animal_data, number_breeds)
+plot_animal(sf_europe, animal_data, number_breeds, interactive = TRUE)
+```
+
+## Animal species on country level
+
+![Animal species on country level](legacy-vis/animal_species_country.jpg)
+
+```{r}
+plot_animal(sf_europe, animal_data, number_species)
+plot_animal(sf_europe, animal_data, number_species, interactive = TRUE)
+```
+
+## Forestry species on country level
+
+![Forestry species on country level](legacy-vis/forestry_species_country.jpg)
+
+## Forestry species in Europe
+
+![Forestry species in Europe](legacy-vis/forestry_species_total.jpg)
+
+## Landrace richness
+
+![Landrace richness](legacy-vis/landrace richness.jpg)
