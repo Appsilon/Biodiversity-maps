@@ -44,6 +44,8 @@ Specifically we need to create 7 maps for the three domains (forests, plants and
 * Visualise species richness at common data level on ONE map for all domains
 * Visualise species richness at common data level on ONE map for all domains AND showing total species richness (all domains together) for each country
 
+NOTE: _We should not include precise coordinates of where the species are found._
+
 
 ## Sample visualizations
 
