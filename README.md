@@ -13,20 +13,24 @@ The project has three phases:
 
 [Full project description](https://docs.google.com/document/d/1UYtPe8WKO9XddAz26toE8vv8qtIRSuWZoDscsPrm8mM/edit# "Google Doc")
 
+## What they have: Current version of the visualisations
 
-## Data
+These data had been used to produce basic maps, such as the one for forest genetic resources:
 
-The data folder linked-up below contains data for plant, animal and forest genetic resources organized in three folders.
 
-The file names and corresponding content are as follows:
+![Forest species legacy](legacy-vis/forestry_species_total.jpg "Forest species per lat/lon map")
 
-* AnGR_FAO_Jan2020.csv – animal genetic resources data
+The data for animal genetic resources do not allow for creating such detailed maps. Here, we focus on the number of species/breeds in each country, such as in this sample map:
 
-* forestry_jan2020_clean2.csv – forest genetic resources data
+![Animal species legacy](legacy-vis/animal_species_country.jpg "Animal species per country map")
 
-* all_pgr.csv – plant genetic resources data
+## What we want to build: inspiration
 
-[Project data](https://drive.google.com/drive/folders/1slcO5BjqCEHJqhTXCfs-Mb1LCFnWxQZi?usp=sharing "Google Drive folder")
+![Inspiration](moodboard/with-raster.png "Inspiration")
+
+## What we currently have: state of work
+
+![Animal species legacy](proposal/animal.png "Animal species proposal")
 
 ## Success criteria
 
@@ -47,14 +51,17 @@ Specifically we need to create 7 maps for the three domains (forests, plants and
 NOTE: _We should not include precise coordinates of where the species are found._
 
 
-## Sample visualizations
+## Data
 
-These data had been used to produce basic maps, such as the one for forest genetic resources:
+The data folder linked-up below contains data for plant, animal and forest genetic resources organized in three folders.
 
+The file names and corresponding content are as follows:
 
-![alt text](https://github.com/Appsilon/Biodiversity-maps/blob/master/legacy-vis/forestry_species_total.jpg "Forest species per lat/lon map")
+* AnGR_FAO_Jan2020.csv – animal genetic resources data
 
-The data for animal genetic resources do not allow for creating such detailed maps. Here, we focus on the number of species/breeds in each country, such as in this sample map:
+* forestry_jan2020_clean2.csv – forest genetic resources data
 
-![alt text](https://github.com/Appsilon/Biodiversity-maps/blob/master/legacy-vis/animal_species_country.jpg "Animal species per country map")
+* all_pgr.csv – plant genetic resources data
+
+[Project data](https://drive.google.com/drive/folders/1slcO5BjqCEHJqhTXCfs-Mb1LCFnWxQZi?usp=sharing "Google Drive folder")
 
