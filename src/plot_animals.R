@@ -59,12 +59,7 @@ plot_animal <- function(sf, animal_data, target_column, interactive = FALSE) {
     # use the "alpha hack"
     # scale_alpha(name = "", range = c(0.6, 0), guide = F)  +
     geom_sf_interactive(aes(fill = !!target_column, tooltip = tooltip_text)) +
-    scale_fill_viridis(name = "Number of animal species",
-                       guide = guide_legend(keyheight = unit(3, units = "mm"),
-                                             keywidth = unit(12, units = "mm"),
-                                             label.position = "bottom",
-                                             title.position = 'top',
-                                             nrow = 1)) +
+    scale_fill_viridis_c(name = "Number of animal species") +
     labs(
       title = "Number of animal species",
       subtitle = "Better description"
@@ -74,6 +69,7 @@ plot_animal <- function(sf, animal_data, target_column, interactive = FALSE) {
   (if (interactive) girafe(ggobj = p) else p)
 }
 
-p <- plot_animal(sf_europe, animal_data, number_species)
-p
-# p <- plot_animal(sf_europe, animal_data, number_breeds)
+animal_speciecs_plot <- plot_animal(sf_europe, animal_data, number_species)
+animal_speciecs_plot
+animal_breeds_plot <- plot_animal(sf_europe, animal_data, number_breeds)
+animal_breeds_plot
