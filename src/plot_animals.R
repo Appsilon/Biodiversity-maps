@@ -33,12 +33,12 @@ prepare_animal_data <- function(animal_data_raw, countries) {
     print(missing)
   }
   filter(animal_data_raw, !(Country_ISO %in% missing$Country_ISO)) %>%
-    select(country, number_species, number_breeds, ISO_A3)
+    dplyr::select(country, number_species, number_breeds, ISO_A3)
 }
 
 cut_visible_europe <- function(sf, data) {
   sf[sf$ISO_A3 %in% data$ISO_A3, ] %>%
-    lwgeom::st_make_valid(.) %>%
+    sf::st_make_valid(.) %>%
     st_crop(xmin = -25, xmax = 50, ymin = 10, ymax = 70)
 }
 
